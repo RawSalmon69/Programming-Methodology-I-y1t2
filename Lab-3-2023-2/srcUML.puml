@@ -1,0 +1,326 @@
+@startuml
+abstract class logic.actor.Actor {
++ {abstract}int getLevel()
++ {abstract}void attack()
+}
+class logic.game.GameIO {
+- {static} Scanner sc
++ {static} Actor selectActor(ArrayList<Actor>)
++ {static} void showItemList(ArrayList<Item>)
++ {static} void showCurrentGhost(ArrayList<Ghost>)
++ {static} void showGameState()
++ {static} void buyNewActor()
++ {static} void buyNewItem()
+}
+class utils.GameUtils {
++ {static} Ghost getNewGhost(int)
++ {static} Ghost getRandomGhost(boolean)
++ {static} Actor getNewActor(int)
++ {static} Item getNewItem(int)
+}
+class logic.ghost.PooYaGhost {
+- int power
++ <<Create>> PooYaGhost(int)
++ int getPower()
++ void setPower(int)
++ int getLevel()
++ String toString()
++ void attack()
++ void damage()
+}
+class grader.student.GameControllerTest {
+~ void testPlayNotDestroyedGhost()
+~ void testPlayDestroyedGhost()
+~ void testPlayWithItem()
+~ void testIsGameOver()
+}
+class grader.student.MonkTest {
+~ Monk monk
+~ void setUp()
+~ void testGetLevel()
+~ void testAttackHighGhost()
+~ void testAttackLowGhost()
+~ void testToString()
+}
+class grader.student.AmuletTest {
+~ Amulet amulet
+~ void setUp()
+~ void testGetLevel()
+~ void testEffectWithLowHp()
+~ void testEffectWithHighHp()
+~ void testToString()
+}
+class grader.student.VillagerTest {
+~ Villager villager
+~ void setUp()
+~ void testGetLevel()
+~ void testAttackLowGhostWithoutAmulet()
+~ void testAttackLowGhostWithAmulet()
+~ void testToString()
+}
+class logic.ghost.PryGhost {
+- int power
+- int ppt
++ <<Create>> PryGhost()
++ <<Create>> PryGhost(int)
++ <<Create>> PryGhost(int,int)
++ int getPower()
++ void setPower(int)
++ int getPpt()
++ void setPpt(int)
++ String toString()
++ void attack()
+}
+abstract class logic.ghost.Ghost {
+- int hp
++ <<Create>> Ghost(int)
++ void setHp(int)
++ int getHp()
++ boolean isDestroyed()
++ void decreaseHp(int)
++ {abstract}int getLevel()
++ {abstract}void attack()
+}
+class logic.game.GameController {
+- int hp
+- int score
+- {static} GameController instance
+- ArrayList<Actor> actors
+- ArrayList<Ghost> ghosts
+- ArrayList<Item> items
++ <<Create>> GameController()
++ {static} GameController getInstance()
++ void play(Actor)
++ void updateGameController()
++ int getHp()
++ void setHp(int)
++ int getScore()
++ ArrayList<Ghost> getGhosts()
++ ArrayList<Item> getItems()
++ void setScore(int)
++ void addNewActor(Actor)
++ void addNewItem(Item)
++ void addNewGhost(Ghost)
++ ArrayList<Actor> getActors()
+- void initGame()
++ boolean isGameOver()
+}
+class logic.actor.Monkey {
++ <<Create>> Monkey()
++ int getLevel()
++ void attack()
++ String toString()
+}
+class utils.Config {
++ {static} int GhostDoctorLevel
++ {static} int MonkLevel
++ {static} int MonkeyLevel
++ {static} int VillagerLevel
++ {static} int GaGhostEnergy
++ {static} int HighGhostHp
++ {static} int LowGhostHp
++ {static} int LowGhostLevel
++ {static} int MaBongGhostPower
++ {static} int MaBongGhostSpeed
++ {static} int PongGhostPower
++ {static} int PongGhostLevel
++ {static} int PooYaGhostLevel
++ {static} int PryGhostPower
++ {static} int AmuletLevel
++ {static} int BananaLevel
++ {static} int SultLevel
++ {static} int LeklaiLevel
+}
+class logic.ghost.PongGhost {
+- int power
++ <<Create>> PongGhost()
++ <<Create>> PongGhost(int)
++ int getPower()
++ void setPower(int)
++ int getLevel()
++ String toString()
++ void attack()
++ void damage()
+}
+abstract class logic.ghost.LowGhost {
++ <<Create>> LowGhost()
++ int getLevel()
+}
+class logic.item.Banana {
++ <<Create>> Banana()
++ int getLevel()
++ void effect()
++ String toString()
+}
+class logic.ghost.MaBongGhost {
+- int power
+- int speed
++ <<Create>> MaBongGhost()
++ <<Create>> MaBongGhost(int)
++ <<Create>> MaBongGhost(int,int)
++ int getPower()
++ void setPower(int)
++ int getSpeed()
++ void setSpeed(int)
++ String toString()
++ void attack()
+}
+class logic.item.Amulet {
++ <<Create>> Amulet()
++ int getLevel()
++ void effect()
++ String toString()
+}
+class grader.student.PryGhostTest {
+~ PryGhost pryGhost
+~ void setUp()
+~ void testConstructor()
+~ void testIsDestroyedFalse()
+~ void testIsDestroyedTrue()
+~ void testDecreaseHp()
+~ void testDecreaseHpBelowZero()
+~ void testAttack()
+~ void testToString()
+}
+class grader.student.GaGhostTest {
+~ GaGhost gaGhost
+~ void setUp()
+~ void testConstructor()
+~ void testIsDestroyedFalse()
+~ void testIsDestroyedTrue()
+~ void testGetHp()
+~ void testDecreaseHp()
+~ void testDecreaseHpBelowZero()
+~ void testAttack()
+~ void testToString()
+}
+class grader.student.MaBongGhostTest {
+~ MaBongGhost maBongGhost
+~ void setUp()
+~ void testConstructor()
+~ void testIsDestroyedFalse()
+~ void testIsDestroyedTrue()
+~ void testGetHp()
+~ void testDecreaseHp()
+~ void testDecreaseHpBelowZero()
+~ void testGetLevel()
+~ void testAttack()
+~ void testToString()
+}
+class grader.student.MonkeyTest {
+~ Monkey monkey
+~ void setUp()
+~ void testGetLevel()
+~ void testAttackLowGhostWithoutBanana()
+~ void testAttackLowGhostWithBanana()
+~ void testToString()
+}
+class application.Main {
+- {static} Scanner sc
++ {static} void main(String[])
+}
+class grader.student.GhostDoctorTest {
+~ GhostDoctor ghostDoctor
+~ void setUp()
+~ void testGetLevel()
+~ void testAttackLowGhost()
+~ void testAttackHighGhost()
+~ void testToString()
+}
+abstract class logic.ghost.HighGhost {
++ <<Create>> HighGhost()
++ {abstract}void damage()
+}
+class grader.student.PongGhostTest {
+~ PongGhost pongGhost
+~ void setUp()
+~ void testConstructor()
+~ void testIsDestroyedFalse()
+~ void testIsDestroyedTrue()
+~ void testGetHp()
+~ void testDecreaseHp()
+~ void testDecreaseHpBelowZero()
+~ void testGetLevel()
+~ void testAttack()
+~ void testToString()
+~ void testDamage()
+}
+class logic.item.Leklai {
++ <<Create>> Leklai()
++ int getLevel()
++ void effect()
++ String toString()
+}
+class logic.ghost.GaGhost {
+- int energy
++ <<Create>> GaGhost()
++ <<Create>> GaGhost(int)
++ int getEnergy()
++ void setEnergy(int)
++ String toString()
++ void attack()
+}
+class grader.student.PooYaGhostTest {
+~ PooYaGhost pooYaGhost
+~ void setUp()
+~ void testIsDestroyedFalse()
+~ void testIsDestroyedTrue()
+~ void testGetHp()
+~ void testDecreaseHp()
+~ void testDecreaseHpBelowZero()
+~ void testAttack()
+~ void testToString()
+~ void testDamage()
+}
+class utils.Randomizer {
+- {static} Random randomizer
++ {static} Random getRandomizer()
+}
+class logic.actor.Villager {
++ <<Create>> Villager()
++ int getLevel()
++ void attack()
++ String toString()
+}
+class logic.actor.Monk {
++ <<Create>> Monk()
++ int getLevel()
++ void attack()
++ String toString()
+}
+abstract class logic.item.Item {
++ {abstract}int getLevel()
++ {abstract}void effect()
+}
+class logic.actor.GhostDoctor {
++ <<Create>> GhostDoctor()
++ int getLevel()
++ void attack()
++ String toString()
+}
+class grader.student.LeklaiTest {
+~ Leklai leklai
+~ void setUp()
+~ void testGetLevel()
+~ void testEffectOnLowGhost()
+~ void testEffectOnHighGhost1()
+~ void testEffectOnHighGhost2()
+~ void testToString()
+}
+
+
+logic.ghost.HighGhost <|-- logic.ghost.PooYaGhost
+logic.ghost.LowGhost <|-- logic.ghost.PryGhost
+logic.actor.Actor <|-- logic.actor.Monkey
+logic.ghost.HighGhost <|-- logic.ghost.PongGhost
+logic.ghost.Ghost <|-- logic.ghost.LowGhost
+logic.item.Item <|-- logic.item.Banana
+logic.ghost.LowGhost <|-- logic.ghost.MaBongGhost
+logic.item.Item <|-- logic.item.Amulet
+logic.ghost.Ghost <|-- logic.ghost.HighGhost
+logic.item.Item <|-- logic.item.Leklai
+logic.ghost.LowGhost <|-- logic.ghost.GaGhost
+logic.actor.Actor <|-- logic.actor.Villager
+logic.actor.Actor <|-- logic.actor.Monk
+logic.actor.Actor <|-- logic.actor.GhostDoctor
+@enduml

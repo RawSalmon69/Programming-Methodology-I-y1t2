@@ -1,0 +1,6 @@
+@startuml
+class application.Main {
+- {static} Scanner sc
++ {static} void main(String[])
+}
+@enduml

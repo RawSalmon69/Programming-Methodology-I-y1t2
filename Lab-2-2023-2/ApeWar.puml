@@ -1,0 +1,124 @@
+@startuml
+class monkey.Ape {
++ <<Create>> Ape(int,int,int)
++ void attack(BaseMonkey)
++ void attackAOE()
++ String getType()
+}
+class monkey.BaseMonkey {
+- int maxHP
+- int hp
+- int atk
+- int def
++ <<Create>> BaseMonkey()
++ <<Create>> BaseMonkey(int,int,int)
++ int getMaxHp()
++ void setMaxHP(int)
++ int getHp()
++ void setHp(int)
++ int getAtk()
++ void setAtk(int)
++ int getDef()
++ void setDef(int)
++ String getType()
++ void attack(BaseMonkey)
++ String toString()
+}
+class application.Main {
+- {static} Scanner sc
+- {static} int playerTurnState
+- {static} GameSystem gs
++ {static} void main(String[])
++ {static} void selectMonkeyFlow()
++ {static} void startGameFlow()
++ {static} BaseMonkey showSelectedMonkey()
++ {static} void showAction(BaseMonkey)
++ {static} void attackFlow(BaseMonkey)
++ {static} void skillFlow(BaseMonkey)
++ {static} int inputCheck(int,int)
+}
+class monkey.UgabugagaMonkey {
+- int DEBUFF
+- int HEAL
++ <<Create>> UgabugagaMonkey(int,int,int)
++ void attack(BaseMonkey)
++ void heal(BaseMonkey)
++ String getType()
+}
+class test.grader.ApeTest {
+~ void constructorTest()
+~ void badConstructorTest()
+~ void attackTest()
+~ void attackAOETest()
+}
+class test.grader.BaseMonkeyTest {
++ void testConstructor()
++ void testBadConstructor()
++ void testAttack()
++ void testGetType()
++ void testSetHp()
++ void testSetPower()
+}
+class test.grader.MuscleMonkeyTest {
++ void testConstructor()
++ void testBadConstructor()
++ void testAttack()
++ void testBuff()
+}
+class test.grader.MommyMonkeyTest {
++ void testConstructor()
++ void testBadConstructor()
++ void testAttack()
++ void testBirth()
+}
+class test.grader.UgabugagaMonkeyTest {
++ void testConstructor()
++ void testBadConstructor()
++ void testAttack()
++ void Heal()
+}
+class monkey.MuscleMonkey {
+- int POWER_UP
++ <<Create>> MuscleMonkey(int,int,int)
++ void attack(BaseMonkey)
++ void buff()
++ String getType()
+}
+class test.grader.GameSystemTest {
+~ void addApeTest()
+~ void removeDeadEntityTest()
+}
+class logic.game.GameSystem {
+- ArrayList<BaseMonkey> monkeyContainer
+- ArrayList<BaseMonkey> apeContainer
+- int gameState
+- int sp
+- boolean gameEnd
+- {static} GameSystem instance
++ <<Create>> GameSystem()
++ {static} GameSystem getInstance()
++ void addMonkey()
++ void addApe()
++ ArrayList<BaseMonkey> getMonkeyContainer()
++ boolean isGameEnd()
++ void setGameEnd(boolean)
++ ArrayList<BaseMonkey> getApeContainer()
++ void printMonkeyStatus()
++ void removeDeadEntity(ArrayList<BaseMonkey>)
++ void showDeadMessage(BaseMonkey,int)
++ int getSp()
++ void setSp(int)
+}
+class monkey.MommyMonkey {
++ <<Create>> MommyMonkey(int,int,int)
++ void attack(BaseMonkey)
++ String getType()
++ void birth()
+}
+
+
+monkey.BaseMonkey <|-- monkey.Ape
+monkey.BaseMonkey <|-- monkey.UgabugagaMonkey
+monkey.BaseMonkey <|-- monkey.MuscleMonkey
+monkey.BaseMonkey <|-- monkey.MommyMonkey
+@enduml

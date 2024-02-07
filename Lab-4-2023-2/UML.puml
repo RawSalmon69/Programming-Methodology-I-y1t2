@@ -1,0 +1,188 @@
+@startuml
+enum item.usage.CookState {
++  RAW
++  COOKED
++  BURNT
+}
+abstract class item.base.BaseConsumption {
++ <<Create>> BaseConsumption(String)
+}
+class item.consumption.Pork {
+- CookState cookState
+- HashMap<CookState,Integer> RECOVER_PT
++ <<Create>> Pork()
+- void initializeRecoveryPT()
++ CookState getCookState()
++ void setCookState(CookState)
++ int getRecoverPoint()
++ String toString()
+}
+interface item.usage.Upgradable {
+~ int getLevel()
+~ void setLevel(int)
+~ int getMaxLevel()
+}
+class item.armor.Boots {
+- int DEF
++ <<Create>> Boots()
++ int getDef()
+}
+abstract class item.base.BaseItem {
+- String name
++ <<Create>> BaseItem(String)
++ String getName()
++ void setName(String)
+}
+abstract class item.base.BaseArmor {
++ <<Create>> BaseArmor(String,int)
++ {abstract}int getDef()
++ String toString()
+}
+class item.weapon.Bow {
+- int level
+- int MAX_LEVEL
+- int[] ATT
++ <<Create>> Bow()
++ int getAtt()
++ int getLevel()
++ void setLevel(int)
++ int getMaxLevel()
++ String toString()
+}
+class item.weapon.Stick {
+- int ATT
++ <<Create>> Stick()
++ int getAtt()
+}
+class item.consumption.HealingPotion {
+- int level
+- int MAX_LEVEL
+- int[] RECOVER_PT
++ <<Create>> HealingPotion()
++ int getLevel()
++ void setLevel(int)
++ int getMaxLevel()
++ int getRecoverPoint()
++ String toString()
+}
+class item.armor.Helmet {
+- int DEF
++ <<Create>> Helmet()
++ int getDef()
+}
+interface item.usage.AttBuffable {
+~ int getAttBuff()
+~ int getBuffTurn()
+}
+class item.consumption.UltimatePotion {
+- int ATT_BUFF
+- int BUFF_TURN
+- int RECOVER_PT
++ <<Create>> UltimatePotion()
++ int getAttBuff()
++ int getBuffTurn()
++ int getRecoverPoint()
++ String toString()
+}
+class item.armor.Suit {
+- int level
+- int MAX_LEVEL
+- int[] DEF
++ <<Create>> Suit()
++ int getLevel()
++ void setLevel(int)
++ int getMaxLevel()
++ int getDef()
++ String toString()
+}
+abstract class item.base.BaseEquipment {
+- int durability
++ <<Create>> BaseEquipment(String,int)
++ int getDurability()
++ void setDurability(int)
+}
+abstract class item.base.BaseWeapon {
+- int RANGE
++ <<Create>> BaseWeapon(String,int,int)
++ {abstract}int getAtt()
++ int getRange()
++ String toString()
+}
+class item.consumption.GoldenApple {
+- CookState cookState
+- HashMap<CookState,Integer> RECOVER_PT
++ <<Create>> GoldenApple()
++ CookState getCookState()
++ void setCookState(CookState)
++ int getRecoverPoint()
++ String toString()
+}
+interface item.usage.Healable {
+~ int getRecoverPoint()
+}
+class item.consumption.Pill {
+- int RECOVER_PT
++ <<Create>> Pill()
++ String toString()
++ int getRecoverPoint()
+}
+interface item.usage.Cookable {
+~ CookState getCookState()
+~ void setCookState(CookState)
+}
+class item.consumption.StrengthPotion {
+- int level
+- int MAX_LEVEL
+- int[] ATT_BUFF
+- int BUFF_TURN
++ <<Create>> StrengthPotion()
++ int getLevel()
++ void setLevel(int)
++ int getMaxLevel()
++ int getBuffTurn()
++ int getAttBuff()
++ String toString()
+}
+class item.weapon.Sword {
+- int level
+- int MAX_LEVEL
+- int[] ATT
++ <<Create>> Sword()
++ int getLevel()
++ void setLevel(int)
++ int getMaxLevel()
++ int getAtt()
++ String toString()
+}
+
+
+item.base.BaseItem <|-- item.base.BaseConsumption
+item.usage.Cookable <|.. item.consumption.Pork
+item.usage.Healable <|.. item.consumption.Pork
+item.base.BaseConsumption <|-- item.consumption.Pork
+item.base.BaseArmor <|-- item.armor.Boots
+item.base.BaseEquipment <|-- item.base.BaseArmor
+item.usage.Upgradable <|.. item.weapon.Bow
+item.base.BaseWeapon <|-- item.weapon.Bow
+item.base.BaseWeapon <|-- item.weapon.Stick
+item.usage.Healable <|.. item.consumption.HealingPotion
+item.usage.Upgradable <|.. item.consumption.HealingPotion
+item.base.BaseConsumption <|-- item.consumption.HealingPotion
+item.base.BaseArmor <|-- item.armor.Helmet
+item.usage.AttBuffable <|.. item.consumption.UltimatePotion
+item.usage.Healable <|.. item.consumption.UltimatePotion
+item.base.BaseConsumption <|-- item.consumption.UltimatePotion
+item.base.BaseArmor <|-- item.armor.Suit
+item.base.BaseItem <|-- item.base.BaseEquipment
+item.base.BaseEquipment <|-- item.base.BaseWeapon
+item.usage.Cookable <|.. item.consumption.GoldenApple
+item.usage.Healable <|.. item.consumption.GoldenApple
+item.base.BaseConsumption <|-- item.consumption.GoldenApple
+item.usage.Healable <|.. item.consumption.Pill
+item.base.BaseConsumption <|-- item.consumption.Pill
+item.usage.AttBuffable <|.. item.consumption.StrengthPotion
+item.usage.Upgradable <|.. item.consumption.StrengthPotion
+item.base.BaseConsumption <|-- item.consumption.StrengthPotion
+item.usage.Upgradable <|.. item.weapon.Sword
+item.base.BaseWeapon <|-- item.weapon.Sword
+@enduml

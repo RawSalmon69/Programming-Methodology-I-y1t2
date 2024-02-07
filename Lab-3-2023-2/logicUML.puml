@@ -1,0 +1,175 @@
+@startuml
+abstract class logic.actor.Actor {
++ {abstract}int getLevel()
++ {abstract}void attack()
+}
+class logic.ghost.MaBongGhost {
+- int power
+- int speed
++ <<Create>> MaBongGhost()
++ <<Create>> MaBongGhost(int)
++ <<Create>> MaBongGhost(int,int)
++ int getPower()
++ void setPower(int)
++ int getSpeed()
++ void setSpeed(int)
++ String toString()
++ void attack()
+}
+class logic.game.GameIO {
+- {static} Scanner sc
++ {static} Actor selectActor(ArrayList<Actor>)
++ {static} void showItemList(ArrayList<Item>)
++ {static} void showCurrentGhost(ArrayList<Ghost>)
++ {static} void showGameState()
++ {static} void buyNewActor()
++ {static} void buyNewItem()
+}
+class logic.item.Amulet {
++ <<Create>> Amulet()
++ int getLevel()
++ void effect()
++ String toString()
+}
+class logic.ghost.PooYaGhost {
+- int power
++ <<Create>> PooYaGhost(int)
++ int getPower()
++ void setPower(int)
++ int getLevel()
++ String toString()
++ void attack()
++ void damage()
+}
+abstract class logic.ghost.HighGhost {
++ <<Create>> HighGhost()
++ {abstract}void damage()
+}
+class logic.item.Leklai {
++ <<Create>> Leklai()
++ int getLevel()
++ void effect()
++ String toString()
+}
+class logic.ghost.PryGhost {
+- int power
+- int ppt
++ <<Create>> PryGhost()
++ <<Create>> PryGhost(int)
++ <<Create>> PryGhost(int,int)
++ int getPower()
++ void setPower(int)
++ int getPpt()
++ void setPpt(int)
++ String toString()
++ void attack()
+}
+abstract class logic.ghost.Ghost {
+- int hp
++ <<Create>> Ghost(int)
++ void setHp(int)
++ int getHp()
++ boolean isDestroyed()
++ void decreaseHp(int)
++ {abstract}int getLevel()
++ {abstract}void attack()
+}
+class logic.game.GameController {
+- int hp
+- int score
+- {static} GameController instance
+- ArrayList<Actor> actors
+- ArrayList<Ghost> ghosts
+- ArrayList<Item> items
++ <<Create>> GameController()
++ {static} GameController getInstance()
++ void play(Actor)
++ void updateGameController()
++ int getHp()
++ void setHp(int)
++ int getScore()
++ ArrayList<Ghost> getGhosts()
++ ArrayList<Item> getItems()
++ void setScore(int)
++ void addNewActor(Actor)
++ void addNewItem(Item)
++ void addNewGhost(Ghost)
++ ArrayList<Actor> getActors()
+- void initGame()
++ boolean isGameOver()
+}
+class logic.ghost.GaGhost {
+- int energy
++ <<Create>> GaGhost()
++ <<Create>> GaGhost(int)
++ int getEnergy()
++ void setEnergy(int)
++ String toString()
++ void attack()
+}
+class logic.actor.Monkey {
++ <<Create>> Monkey()
++ int getLevel()
++ void attack()
++ String toString()
+}
+class logic.actor.Villager {
++ <<Create>> Villager()
++ int getLevel()
++ void attack()
++ String toString()
+}
+class logic.ghost.PongGhost {
+- int power
++ <<Create>> PongGhost()
++ <<Create>> PongGhost(int)
++ int getPower()
++ void setPower(int)
++ int getLevel()
++ String toString()
++ void attack()
++ void damage()
+}
+class logic.actor.Monk {
++ <<Create>> Monk()
++ int getLevel()
++ void attack()
++ String toString()
+}
+abstract class logic.item.Item {
++ {abstract}int getLevel()
++ {abstract}void effect()
+}
+class logic.actor.GhostDoctor {
++ <<Create>> GhostDoctor()
++ int getLevel()
++ void attack()
++ String toString()
+}
+class logic.item.Banana {
++ <<Create>> Banana()
++ int getLevel()
++ void effect()
++ String toString()
+}
+abstract class logic.ghost.LowGhost {
++ <<Create>> LowGhost()
++ int getLevel()
+}
+
+
+logic.ghost.LowGhost <|-- logic.ghost.MaBongGhost
+logic.item.Item <|-- logic.item.Amulet
+logic.ghost.HighGhost <|-- logic.ghost.PooYaGhost
+logic.ghost.Ghost <|-- logic.ghost.HighGhost
+logic.item.Item <|-- logic.item.Leklai
+logic.ghost.LowGhost <|-- logic.ghost.PryGhost
+logic.ghost.LowGhost <|-- logic.ghost.GaGhost
+logic.actor.Actor <|-- logic.actor.Monkey
+logic.actor.Actor <|-- logic.actor.Villager
+logic.ghost.HighGhost <|-- logic.ghost.PongGhost
+logic.actor.Actor <|-- logic.actor.Monk
+logic.actor.Actor <|-- logic.actor.GhostDoctor
+logic.item.Item <|-- logic.item.Banana
+logic.ghost.Ghost <|-- logic.ghost.LowGhost
+@enduml
